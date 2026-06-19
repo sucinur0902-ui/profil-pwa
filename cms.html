@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Modern Mini CMS</title>
+
+    <link rel="stylesheet" href="cms.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <nav class="sidebar">
+
+        <div class="logo">
+            MINI CMS
+        </div>
+
+       <ul class="nav-links">
+
+    <li class="nav-item active"
+    onclick="showContent('content')">
+
+        Content
+
+    </li>
+
+    <li class="nav-item"
+    onclick="showContent('users')">
+
+        Users
+
+    </li>
+
+    <li class="nav-item"
+    onclick="showContent('categories')">
+
+        Categories
+
+    </li>
+
+</ul>
+
+    </nav>
+
+
+
+    <!-- MAIN -->
+
+    <div class="main-body">
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div class="user-info">
+
+                Hallo,
+                <strong>Administrator</strong>
+
+            </div>
+
+            <button class="btn-logout">
+
+                Keluar
+
+            </button>
+
+        </header>
+
+
+
+        <section class="content-container">
+
+    <!-- CONTENT -->
+
+    <div id="content-page">
+
+        <button class="btn-add"
+        onclick="toggleModal()">
+
+            + Tambah Artikel
+
+        </button>
+
+        <div class="card">
+
+            <h2>Daftar Artikel</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>No</th>
+                        <th>Judul</th>
+                        <th>Kategori</th>
+                        <th>Penulis</th>
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="article-list">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- USERS -->
+
+    <div id="users-page"
+    style="display:none;">
+
+        <div class="card">
+
+            <h2>Data Users</h2>
+
+            <table>
+
+                <tr>
+
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Status</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>1</td>
+                    <td>admin</td>
+                    <td>Aktif</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CATEGORIES -->
+
+    <div id="categories-page"
+    style="display:none;">
+
+        <div class="card">
+
+            <h2>Daftar Kategori</h2>
+
+            <ul>
+
+                <li>Web Programming</li>
+                <li>Tutorial PHP</li>
+                <li>Tutorial Java</li>
+                <li>Teori Diologi</li>
+                <li>Fiksi</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+    </div>
+
+</div>
+
+
+
+<!-- MODAL -->
+
+<div id="formModal" class="modal">
+
+    <div class="modal-card">
+
+        <h2>Tulis Artikel</h2>
+
+        <form id="cmsForm">
+
+            <input type="hidden" id="editIndex">
+
+            <input type="text"
+            id="judul"
+            placeholder="Judul Artikel"
+            required>
+
+            <select id="kategori">
+
+                <option value="Web Programming">
+                    Web Programming
+                </option>
+
+                <option value="Tutorial PHP">
+                    Tutorial PHP
+                </option>
+
+                <option value="Tutorial Java">
+                    Tutorial Java
+                </option>
+
+                <option value="Teori Diologi">
+                    Teori Diologi
+                </option>
+
+                 <option value="Fiksi">
+                    Fiksi
+                </option>
+
+            </select>
+
+            <input type="text"
+            id="penulis"
+            placeholder="Nama Penulis"
+            required>
+
+            <textarea
+            id="isi"
+            placeholder="Isi Artikel"
+            required></textarea>
+
+            <div class="modal-btns">
+
+                <button type="submit"
+                class="btn-save">
+
+                    Simpan
+
+                </button>
+
+                <button type="button"
+                class="btn-cancel"
+                onclick="toggleModal()">
+
+                    Batal
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+const isLogin =
+localStorage.getItem("isLogin");
+
+if(isLogin !== "true"){
+
+    window.location.href =
+    "login.html";
+
+}
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
