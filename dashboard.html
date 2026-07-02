@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Profile</title>
+
+<link rel="stylesheet" href="dashboard.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<meta name="theme-color" content="#8b5cf6">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+<div class="profile">
+
+<img src="foto.jpeg" alt="Profile">
+
+<h2>Suci Nur Khayani</h2>
+
+<p>Informatics Student</p>
+
+</div>
+
+<ul class="menu">
+
+<li onclick="scrollToSection('hero')">
+
+<i class="fa-solid fa-house"></i>
+Dashboard
+
+</li>
+
+<li onclick="scrollToSection('tentang')">
+
+<i class="fa-regular fa-user"></i>
+Tentang Saya
+
+</li>
+
+<li onclick="scrollToSection('favorite')">
+
+<i class="fa-solid fa-heart"></i>
+Favorite
+
+</li>
+
+<li onclick="scrollToSection('lokasi')">
+
+<i class="fa-solid fa-location-dot"></i>
+Lokasi
+
+</li>
+
+<li onclick="scrollToSection('contact')">
+
+<i class="fa-regular fa-envelope"></i>
+Contact
+
+</li>
+
+<li onclick="goToCMS()">
+
+<i class="fa-solid fa-layer-group"></i>
+CMS
+
+</li>
+
+</ul>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+<header class="topbar">
+
+<div>
+
+<h1>Dashboard</h1>
+
+<p id="greeting"></p>
+
+</div>
+
+<div class="top-actions">
+
+<button id="darkModeBtn">
+
+🌙 Dark Mode
+
+</button>
+
+</div>
+
+</header>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+
+<div>
+
+<h2>Good Morning, Suci 🌸</h2>
+
+<p>
+Semangat belajar dan terus berkembang!
+</p>
+
+<button onclick="scrollToSection('tentang')">
+
+Lihat Profile
+
+</button>
+
+</div>
+
+<div class="hero-image">
+
+<img src="foto.jpeg" alt="Foto">
+
+<div class="circle"></div>
+
+<div class="circle small"></div>
+
+</div>
+
+</section>
+
+<!-- CARD -->
+<section class="stats">
+
+<!-- CARD 1 -->
+<div class="stat-card">
+
+<div class="stat-icon purple">
+
+<i class="fa-solid fa-book"></i>
+
+</div>
+
+<div>
+
+<h3>Artikel</h3>
+
+<h1>12</h1>
+
+<p>Artikel terbaru</p>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+<div class="stat-card">
+
+<div class="stat-icon pink">
+
+<i class="fa-solid fa-code"></i>
+
+</div>
+
+<div>
+
+<h3>Project</h3>
+
+<h1>8</h1>
+
+<p>Project selesai</p>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+<div class="stat-card">
+
+<div class="stat-icon blue">
+
+<i class="fa-solid fa-award"></i>
+
+</div>
+
+<div>
+
+<h3>Skills</h3>
+
+<h1>15</h1>
+
+<p>Kemampuan</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+TENTANG SAYA
+========================= -->
+<section class="card hidden about-full">
+
+    <h2>Tentang Saya</h2>
+
+    <p>
+        Hallo, aku mahasiswa informatika.
+        Baru pertama kali kenal dunia coding dan IT.
+        Masih harus banyak belajar,
+        tapi aku suka gambar, nulis,
+        dan pengen bikin sesuatu dari skill
+        yang sedang dipelajari.
+    </p>
+
+</section>
+
+<!-- =========================
+3 KOTAK
+========================= -->
+<div class="triple-grid">
+
+    <!-- KEGIATAN -->
+    <section class="card hidden">
+
+        <h2>Kegiatan Harian</h2>
+
+        <ul class="activity">
+
+            <li>📚 Belajar Coding</li>
+            <li>🎵 Mendengarkan Musik</li>
+            <li>💻 Membuat Website</li>
+            <li>☕ Nongkrong & Diskusi</li>
+
+        </ul>
+
+    </section>
+
+   <!-- FAVORITE -->
+    <div class="card">
+
+    <h2>Favorite</h2>
+
+    <div class="favorite-list">
+
+    <div class="favorite-item">
+
+    <div class="favorite-left">
+
+    <div class="favorite-icon">
+    🍜
+    </div>
+
+    <div class="favorite-text">
+
+    <h4>Makanan</h4>
+
+    <p>Nasi Goreng & Bakso</p>
+
+    </div>
+
+    </div>
+
+    <span class="favorite-badge">
+    Favorite
+    </span>
+
+    </div>
+
+    <div class="favorite-item">
+
+    <div class="favorite-left">
+
+    <div class="favorite-icon">
+    🎨
+    </div>
+
+    <div class="favorite-text">
+
+    <h4>Warna</h4>
+
+    <p>Hitam & Biru</p>
+
+    </div>
+
+    </div>
+
+    <span class="favorite-badge">
+    Loved
+    </span>
+
+    </div>
+
+    <div class="favorite-item">
+
+    <div class="favorite-left">
+
+    <div class="favorite-icon">
+    🎵
+    </div>
+
+    <div class="favorite-text">
+
+    <h4>Musik</h4>
+
+    <p>Pop & Lofi</p>
+
+    </div>
+
+    </div>
+
+    <span class="favorite-badge">
+    Mood
+    </span>
+
+    </div>
+
+    </div>
+
+    </div>
+
+    <!-- SKILLS -->
+    <section class="card hidden">
+
+        <h2>Skills</h2>
+
+        <div class="skill">
+
+            <p>HTML</p>
+
+            <div class="skill-bar">
+                <div style="width:90%"></div>
+            </div>
+
+        </div>
+
+        <div class="skill">
+
+            <p>CSS</p>
+
+            <div class="skill-bar">
+                <div style="width:85%"></div>
+            </div>
+
+        </div>
+
+        <div class="skill">
+
+            <p>JavaScript</p>
+
+            <div class="skill-bar">
+                <div style="width:70%"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- =========================
+LOKASI + CONTACT
+========================= -->
+<div class="bottom-grid">
+
+    <!-- LOKASI -->
+    <section class="card hidden">
+
+        <h2>Lokasi Saya</h2>
+
+        <div id="map"></div>
+
+    </section>
+
+    <!-- CONTACT -->
+    <section class="card hidden">
+
+        <h2>Contact</h2>
+
+        <form>
+
+            <input
+            type="text"
+            placeholder="Nama">
+
+            <input
+            type="email"
+            placeholder="Email">
+
+            <textarea
+            placeholder="Pesan"></textarea>
+
+            <button type="submit">
+
+                Kirim
+
+            </button>
+
+        </form>
+
+    </section>
+
+</div>
+
+<!-- CMS ARTICLES -->
+<section class="card cms-artikel">
+
+<h2>Artikel Dari CMS</h2>
+
+<div id="cmsArtikelContainer">
+
+<p>Loading artikel...</p>
+
+</div>
+
+</section>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="dashboard.js"></script>
+
+<script>
+
+if("serviceWorker" in navigator){
+
+window.addEventListener("load",()=>{
+
+navigator.serviceWorker.register(
+"./service-worker.js"
+)
+
+.then(()=>{
+
+console.log("PWA aktif");
+
+})
+
+.catch((err)=>{
+
+console.log(err);
+
+});
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
