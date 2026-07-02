@@ -1,158 +1,84 @@
 const express = require("express");
+const mysql = require("mysql2");
 const cors = require("cors");
-const db = require("./db");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-/*
-=========================
-GET DATA
-=========================
-*/
-app.get("/artikel", (req, res) => {
+/* =========================
+DATABASE
+========================= */
 
-    db.query(
-        "SELECT * FROM artikel",
-        (err, result) => {
+const db = mysql.createConnection({
 
-        if(err){
-            throw err;
-        }
+host: "localhost",
 
-        res.json(result);
+user: "root",
 
-    });
+password: "",
+
+database: "cms_profile"
 
 });
 
-/*
-=========================
-TAMBAH DATA
-=========================
-*/
-app.post("/artikel", (req, res) => {
+/* CONNECT DATABASE */
 
-    const {
-        judul,
-        kategori,
-        penulis,
-        isi
-    } = req.body;
+db.connect((err) => {
 
-    const sql =
-    `INSERT INTO artikel
-    (judul, kategori, penulis, isi)
-    VALUES (?, ?, ?, ?)`;
+if(err){
 
-    db.query(
-        sql,
-        [
-            judul,
-            kategori,
-            penulis,
-            isi
-        ],
-        (err, result) => {
+console.log("Database Error");
 
-        if(err){
-            throw err;
-        }
+}else{
 
-        res.json({
-            message: "Artikel berhasil ditambah"
-        });
+console.log("Database connected");
 
-    });
+}
 
 });
 
-/*
-=========================
-UPDATE DATA
-=========================
-*/
-app.put("/artikel/:id", (req, res) => {
+/* =========================
+ROUTE HOME
+========================= */
 
-    const id = req.params.id;
+app.get("/", (req,res) => {
 
-    const {
-        judul,
-        kategori,
-        penulis,
-        isi
-    } = req.body;
-
-    const sql =
-    `UPDATE artikel
-    SET
-    judul=?,
-    kategori=?,
-    penulis=?,
-    isi=?
-    WHERE id=?`;
-
-    db.query(
-        sql,
-        [
-            judul,
-            kategori,
-            penulis,
-            isi,
-            id
-        ],
-        (err, result) => {
-
-        if(err){
-            throw err;
-        }
-
-        res.json({
-            message: "Artikel berhasil diupdate"
-        });
-
-    });
+res.send("Backend Running");
 
 });
 
-/*
-=========================
-DELETE DATA
-=========================
-*/
-app.delete("/artikel/:id", (req, res) => {
+/* =========================
+GET ARTIKEL
+========================= */
 
-    const id = req.params.id;
+app.get("/api/artikel", (req,res) => {
 
-    const sql =
-    "DELETE FROM artikel WHERE id=?";
+const sql = "SELECT * FROM artikel";
 
-    db.query(sql, [id], (err, result) => {
+db.query(sql,(err,result)=>{
 
-        if(err){
-            console.log(err);
-            res.send(err);
-        }else{
+if(err){
 
-            res.json({
-                message: "Artikel berhasil dihapus"
-            });
+res.status(500).json(err);
 
-        }
+}else{
 
-    });
+res.json(result);
+
+}
 
 });
 
-/*
-=========================
-JALANKAN SERVER
-=========================
-*/
-app.listen(3000, () => {
+});
 
-    console.log("Server running di port 3000");
+/* =========================
+SERVER
+========================= */
+
+app.listen(3000, ()=>{
+
+console.log("Server running di port 3000");
 
 });

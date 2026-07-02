@@ -21,7 +21,9 @@ href="https://unpkg.com/leaflet/dist/leaflet.css"
 />
 
 <link rel="manifest" href="manifest.json">
+
 <link rel="icon" href="icon-192.png">
+
 <meta name="theme-color" content="#8b5cf6">
 
 </head>
@@ -30,7 +32,9 @@ href="https://unpkg.com/leaflet/dist/leaflet.css"
 
 <div class="dashboard">
 
-<!-- SIDEBAR -->
+<!-- =========================
+SIDEBAR
+========================= -->
 <aside class="sidebar">
 
 <div class="profile">
@@ -91,9 +95,14 @@ CMS
 
 </aside>
 
-<!-- MAIN -->
+<!-- =========================
+MAIN CONTENT
+========================= -->
 <main class="main-content">
 
+<!-- =========================
+TOPBAR
+========================= -->
 <header class="topbar">
 
 <div>
@@ -116,7 +125,9 @@ CMS
 
 </header>
 
-<!-- HERO -->
+<!-- =========================
+HERO
+========================= -->
 <section id="hero" class="hero">
 
 <div>
@@ -147,10 +158,12 @@ Lihat Profile
 
 </section>
 
-<!-- CARD -->
+<!-- =========================
+STAT CARD
+========================= -->
 <section class="stats">
 
-<!-- CARD 1 -->
+<!-- ARTIKEL -->
 <div class="stat-card">
 
 <div class="stat-icon purple">
@@ -171,7 +184,7 @@ Lihat Profile
 
 </div>
 
-<!-- CARD 2 -->
+<!-- PROJECT -->
 <div class="stat-card">
 
 <div class="stat-icon pink">
@@ -192,7 +205,7 @@ Lihat Profile
 
 </div>
 
-<!-- CARD 3 -->
+<!-- SKILLS -->
 <div class="stat-card">
 
 <div class="stat-icon blue">
@@ -218,18 +231,23 @@ Lihat Profile
 <!-- =========================
 TENTANG SAYA
 ========================= -->
-<section class="card hidden about-full">
+<section
+id="tentang"
+class="card hidden about-full"
+>
 
-    <h2>Tentang Saya</h2>
+<h2>Tentang Saya</h2>
 
-    <p>
-        Hallo, aku mahasiswa informatika.
-        Baru pertama kali kenal dunia coding dan IT.
-        Masih harus banyak belajar,
-        tapi aku suka gambar, nulis,
-        dan pengen bikin sesuatu dari skill
-        yang sedang dipelajari.
-    </p>
+<p>
+
+Hallo, aku mahasiswa informatika.
+Baru pertama kali kenal dunia coding dan IT.
+Masih harus banyak belajar,
+tapi aku suka gambar, nulis,
+dan pengen bikin sesuatu dari skill
+yang sedang dipelajari.
+
+</p>
 
 </section>
 
@@ -238,141 +256,159 @@ TENTANG SAYA
 ========================= -->
 <div class="triple-grid">
 
-    <!-- KEGIATAN -->
-    <section class="card hidden">
+<!-- KEGIATAN -->
+<section class="card hidden">
 
-        <h2>Kegiatan Harian</h2>
+<h2>Kegiatan Harian</h2>
 
-        <ul class="activity">
+<ul class="activity">
 
-            <li>📚 Belajar Coding</li>
-            <li>🎵 Mendengarkan Musik</li>
-            <li>💻 Membuat Website</li>
-            <li>☕ Nongkrong & Diskusi</li>
+<li>📚 Belajar Coding</li>
+<li>🎵 Mendengarkan Musik</li>
+<li>💻 Membuat Website</li>
+<li>☕ Nongkrong & Diskusi</li>
 
-        </ul>
+</ul>
 
-    </section>
+</section>
 
-   <!-- FAVORITE -->
-    <div class="card">
+<!-- FAVORITE -->
+<section
+id="favorite"
+class="card hidden"
+>
 
-    <h2>Favorite</h2>
+<h2>Favorite</h2>
 
-    <div class="favorite-list">
+<div class="favorite-list">
 
-    <div class="favorite-item">
+<!-- ITEM -->
+<div class="favorite-item">
 
-    <div class="favorite-left">
+<div class="favorite-left">
 
-    <div class="favorite-icon">
-    🍜
-    </div>
+<div class="favorite-icon">
+🍜
+</div>
 
-    <div class="favorite-text">
+<div class="favorite-text">
 
-    <h4>Makanan</h4>
+<h4>Makanan</h4>
 
-    <p>Nasi Goreng & Bakso</p>
+<p>Nasi Goreng & Bakso</p>
 
-    </div>
+</div>
 
-    </div>
+</div>
 
-    <span class="favorite-badge">
-    Favorite
-    </span>
+<span class="favorite-badge">
 
-    </div>
+Favorite
 
-    <div class="favorite-item">
+</span>
 
-    <div class="favorite-left">
+</div>
 
-    <div class="favorite-icon">
-    🎨
-    </div>
+<!-- ITEM -->
+<div class="favorite-item">
 
-    <div class="favorite-text">
+<div class="favorite-left">
 
-    <h4>Warna</h4>
+<div class="favorite-icon">
+🎨
+</div>
 
-    <p>Hitam & Biru</p>
+<div class="favorite-text">
 
-    </div>
+<h4>Warna</h4>
 
-    </div>
+<p>Hitam & Biru</p>
 
-    <span class="favorite-badge">
-    Loved
-    </span>
+</div>
 
-    </div>
+</div>
 
-    <div class="favorite-item">
+<span class="favorite-badge">
 
-    <div class="favorite-left">
+Loved
 
-    <div class="favorite-icon">
-    🎵
-    </div>
+</span>
 
-    <div class="favorite-text">
+</div>
 
-    <h4>Musik</h4>
+<!-- ITEM -->
+<div class="favorite-item">
 
-    <p>Pop & Lofi</p>
+<div class="favorite-left">
 
-    </div>
+<div class="favorite-icon">
+🎵
+</div>
 
-    </div>
+<div class="favorite-text">
 
-    <span class="favorite-badge">
-    Mood
-    </span>
+<h4>Musik</h4>
 
-    </div>
+<p>Pop & Lofi</p>
 
-    </div>
+</div>
 
-    </div>
+</div>
 
-    <!-- SKILLS -->
-    <section class="card hidden">
+<span class="favorite-badge">
 
-        <h2>Skills</h2>
+Mood
 
-        <div class="skill">
+</span>
 
-            <p>HTML</p>
+</div>
 
-            <div class="skill-bar">
-                <div style="width:90%"></div>
-            </div>
+</div>
 
-        </div>
+</section>
 
-        <div class="skill">
+<!-- SKILL -->
+<section class="card hidden">
 
-            <p>CSS</p>
+<h2>Skills</h2>
 
-            <div class="skill-bar">
-                <div style="width:85%"></div>
-            </div>
+<div class="skill">
 
-        </div>
+<p>HTML</p>
 
-        <div class="skill">
+<div class="skill-bar">
 
-            <p>JavaScript</p>
+<div style="width:90%"></div>
 
-            <div class="skill-bar">
-                <div style="width:70%"></div>
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </section>
+<div class="skill">
+
+<p>CSS</p>
+
+<div class="skill-bar">
+
+<div style="width:85%"></div>
+
+</div>
+
+</div>
+
+<div class="skill">
+
+<p>JavaScript</p>
+
+<div class="skill-bar">
+
+<div style="width:70%"></div>
+
+</div>
+
+</div>
+
+</section>
 
 </div>
 
@@ -381,46 +417,57 @@ LOKASI + CONTACT
 ========================= -->
 <div class="bottom-grid">
 
-    <!-- LOKASI -->
-    <section class="card hidden">
+<!-- LOKASI -->
+<section
+id="lokasi"
+class="card hidden"
+>
 
-        <h2>Lokasi Saya</h2>
+<h2>Lokasi Saya</h2>
 
-        <div id="map"></div>
+<div id="map"></div>
 
-    </section>
+</section>
 
-    <!-- CONTACT -->
-    <section class="card hidden">
+<!-- CONTACT -->
+<section
+id="contact"
+class="card hidden"
+>
 
-        <h2>Contact</h2>
+<h2>Contact</h2>
 
-        <form>
+<form>
 
-            <input
-            type="text"
-            placeholder="Nama">
+<input
+type="text"
+placeholder="Nama"
+>
 
-            <input
-            type="email"
-            placeholder="Email">
+<input
+type="email"
+placeholder="Email"
+>
 
-            <textarea
-            placeholder="Pesan"></textarea>
+<textarea
+placeholder="Pesan"
+></textarea>
 
-            <button type="submit">
+<button type="submit">
 
-                Kirim
+Kirim
 
-            </button>
+</button>
 
-        </form>
+</form>
 
-    </section>
+</section>
 
 </div>
 
-<!-- CMS ARTICLES -->
+<!-- =========================
+CMS ARTICLE
+========================= -->
 <section class="card cms-artikel">
 
 <h2>Artikel Dari CMS</h2>
@@ -433,21 +480,28 @@ LOKASI + CONTACT
 
 </section>
 
+</main>
+
 </div>
 
+<!-- =========================
+SCRIPT
+========================= -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script src="dashboard.js"></script>
 
+<!-- =========================
+PWA
+========================= -->
 <script>
 
 if("serviceWorker" in navigator){
 
 window.addEventListener("load",()=>{
 
-navigator.serviceWorker.register(
-"./service-worker.js"
-)
+navigator.serviceWorker
+.register("./service-worker.js")
 
 .then(()=>{
 

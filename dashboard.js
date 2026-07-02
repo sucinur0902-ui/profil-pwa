@@ -44,14 +44,18 @@ SCROLL MENU
 
 function scrollToSection(id){
 
-    const section =
-    document.getElementById(id);
+const section =
+document.getElementById(id);
 
-    section.scrollIntoView({
+if(section){
 
-        behavior: "smooth"
+section.scrollIntoView({
 
-    });
+behavior:"smooth"
+
+});
+
+}
 
 }
 
@@ -59,22 +63,27 @@ function scrollToSection(id){
 MAP
 ========================= */
 
+const mapElement =
+document.getElementById("map");
+
+if(mapElement){
+
 const map =
 L.map('map').setView(
-[-7.7233, 109.0090],
+[-7.7233,109.0090],
 13
 );
 
 L.tileLayer(
 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 {
-    attribution:
-    '&copy; OpenStreetMap'
+attribution:
+'&copy; OpenStreetMap'
 }
 ).addTo(map);
 
 L.marker(
-[-7.7233, 109.0090]
+[-7.7233,109.0090]
 ).addTo(map)
 
 .bindPopup(
@@ -83,6 +92,7 @@ L.marker(
 
 .openPopup();
 
+}
 
 /* =========================
 DARK MODE
@@ -102,6 +112,7 @@ document.body.classList.toggle(
 );
 
 /* SIMPAN MODE */
+
 if(
 document.body.classList.contains(
 "dark"
@@ -116,7 +127,9 @@ localStorage.setItem(
 darkBtn.innerHTML =
 "☀️ Light Mode";
 
-}else{
+}
+
+else{
 
 localStorage.setItem(
 "theme",
@@ -131,7 +144,10 @@ darkBtn.innerHTML =
 }
 );
 
-/* CEK THEME SAAT REFRESH */
+/* =========================
+CEK THEME
+========================= */
+
 if(
 localStorage.getItem(
 "theme"
@@ -158,13 +174,12 @@ window.location.href =
 
 }
 
-
 /* =========================
 AMBIL ARTIKEL CMS
 ========================= */
 
 const api =
-"http://localhost:3000/artikel";
+"http://localhost:3000/api/artikel";
 
 async function tampilkanArtikelCMS(){
 
@@ -183,7 +198,21 @@ document.getElementById(
 
 container.innerHTML = "";
 
-articles.forEach((article) => {
+/* CEK DATA */
+
+if(articles.length === 0){
+
+container.innerHTML =
+
+"<p>Belum ada artikel</p>";
+
+return;
+
+}
+
+/* LOOP ARTIKEL */
+
+articles.forEach((article)=>{
 
 container.innerHTML += `
 
@@ -208,9 +237,14 @@ ${article.kategori}
 
 });
 
-}catch(error){
+}
 
-console.log(error);
+catch(error){
+
+console.log(
+"Error:",
+error
+);
 
 }
 
@@ -218,12 +252,25 @@ console.log(error);
 
 tampilkanArtikelCMS();
 
+/* =========================
+PROFILE IMAGE EFFECT
+========================= */
 
 const profileImg =
-document.querySelector(".profile img");
+document.querySelector(
+".profile img"
+);
 
-profileImg.addEventListener("click",()=>{
+if(profileImg){
 
-profileImg.classList.toggle("active-img");
+profileImg.addEventListener(
+"click",
+()=>{
+
+profileImg.classList.toggle(
+"active-img"
+);
 
 });
+
+}
