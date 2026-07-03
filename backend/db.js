@@ -1,18 +1,20 @@
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
-    host: "localhost",
+    host: "reseau.proxy.rlwy.net",
     user: "root",
-    password: "",
-    database: "cms_profile"
+    password: "XHkElVdPdpsaRDGqaWCgsVAsAbHhjJKT",
+    database: "railway",
+    port: 14654
 });
 
 connection.connect((err) => {
 
     if(err){
-        console.log("Database gagal connect");
+        console.log("❌ Database gagal connect");
+        console.log(err);
     } else {
-        console.log("Database connected");
+        console.log("✅ Database Connected");
     }
 
 });
