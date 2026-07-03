@@ -1,4 +1,10 @@
-const api = "http://localhost:3000/api/artikel";
+const api = fetch("https://profil-pwa-backend-production.up.railway.app/api/artikel")
+.then(res => res.json())
+.then(data => {
+
+    console.log(data);
+
+});
 /*
 ======================
 MODAL
