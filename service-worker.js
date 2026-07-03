@@ -1,48 +1,109 @@
-const CACHE_NAME = "profile-cache-v1";
+const CACHE_NAME = "profile-cache-v2";
 
 const urlsToCache = [
-
-"/",
-"/dashboard.html",
-"/dashboard.css",
-"/dashboard.js",
-"/cms.html",
-"/cms.css",
-"/cms.js",
-"/login.html",
-"/login.css",
-"/foto.jpeg"
-
+    "/",
+    "/index.html",
+    "/dashboard.css",
+    "/dashboard.js",
+    "/cms.html",
+    "/cms.css",
+    "/cms.js",
+    "/login.html",
+    "/login.css",
+    "/login.js",
+    "/style.css",
+    "/script.js",
+    "/foto.jpeg",
+    "/icon-192.png",
+    "/icon-512.png"
 ];
 
-self.addEventListener("install", (event)=>{
+// Install Service Worker
+self.addEventListener("install", (event) => {
 
-event.waitUntil(
+    console.log("Service Worker Installed");
 
-caches.open(CACHE_NAME)
+    self.skipWaiting();
 
-.then((cache)=>{
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+        .then(async (cache) => {
 
-return cache.addAll(urlsToCache);
+            for (const url of urlsToCache) {
+                try {
+                    await cache.add(url);
+                    console.log("✔ Berhasil:", url);
+                } catch (err) {
+                    console.error("❌ Gagal:", url, err);
+                }
+            }
 
-})
-
-);
+        })
+    );
 
 });
 
-self.addEventListener("fetch",(event)=>{
+// Activate
+self.addEventListener("activate", (event) => {
 
-event.respondWith(
+    console.log("Service Worker Activated");
 
-caches.match(event.request)
+    event.waitUntil(
 
-.then((response)=>{
+        caches.keys().then((cacheNames) => {
 
-return response || fetch(event.request);
+            return Promise.all(
 
-})
+                cacheNames.map((cache) => {
 
-);
+                    if (cache !== CACHE_NAME) {
+
+                        return caches.delete(cache);
+
+                    }
+
+                })
+
+            );
+
+        })
+
+    );
+
+});
+
+// Fetch
+self.addEventListener("fetch", (event) => {
+
+    event.respondWith(
+
+        caches.match(event.request)
+
+        .then((response) => {
+
+            return response || fetch(event.request);
+
+        })
+
+    );
+
+});
+
+// Push Notification
+self.addEventListener("message", (event) => {
+
+    if (event.data === "show-notification") {
+
+        self.registration.showNotification("Website Profil", {
+
+            body: "Selamat datang di Website Profil Suci Nur Khayani 🎉",
+
+            icon: "icon-192.png",
+
+            badge: "icon-192.png"
+
+        });
+
+    }
 
 });

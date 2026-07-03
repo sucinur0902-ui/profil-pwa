@@ -1,44 +1,49 @@
-const form =
-document.getElementById(
-"loginForm"
-);
+/* =========================
+LOGIN CMS
+========================= */
 
-form.addEventListener(
-"submit",
-function(e){
+const form = document.getElementById("loginForm");
 
-e.preventDefault();
+if (form) {
 
-const username =
-document.getElementById(
-"username"
-).value;
+    form.addEventListener("submit", function (e) {
 
-const password =
-document.getElementById(
-"password"
-).value;
+        e.preventDefault();
 
-if(
-username === "suci" &&
-password === "090225"
-){
+        const username = document
+            .getElementById("username")
+            .value
+            .trim();
 
-localStorage.setItem(
-"isLogin",
-"true"
-);
+        const password = document
+            .getElementById("password")
+            .value
+            .trim();
 
-window.location.href =
-"cms.html";
+        // Validasi kolom kosong
+        if (username === "" || password === "") {
 
-}else{
+            alert("Username dan Password tidak boleh kosong!");
 
-alert(
-"Username atau password salah!"
-);
+            return;
+
+        }
+
+        // Login
+        if (username === "suci" && password === "090225") {
+
+            localStorage.setItem("isLogin", "true");
+
+            alert("Login berhasil!");
+
+            window.location.href = "cms.html";
+
+        } else {
+
+            alert("Username atau Password salah!");
+
+        }
+
+    });
 
 }
-
-}
-);

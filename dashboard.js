@@ -2,39 +2,29 @@
 UCAPAN SESUAI JAM
 ========================= */
 
-const greeting =
-document.getElementById(
-"greeting"
-);
+const greeting = document.getElementById("greeting");
 
-const hour =
-new Date().getHours();
+if (greeting) {
 
-if(hour >= 4 && hour < 11){
+    const hour = new Date().getHours();
 
-greeting.innerHTML =
-"🌅 Selamat Pagi";
+    if (hour >= 4 && hour < 11) {
 
-}
+        greeting.innerHTML = "🌅 Selamat Pagi";
 
-else if(hour >= 11 && hour < 15){
+    } else if (hour >= 11 && hour < 15) {
 
-greeting.innerHTML =
-"☀️ Selamat Siang";
+        greeting.innerHTML = "☀️ Selamat Siang";
 
-}
+    } else if (hour >= 15 && hour < 18) {
 
-else if(hour >= 15 && hour < 18){
+        greeting.innerHTML = "🌇 Selamat Sore";
 
-greeting.innerHTML =
-"🌇 Selamat Sore";
+    } else {
 
-}
+        greeting.innerHTML = "🌙 Selamat Malam";
 
-else{
-
-greeting.innerHTML =
-"🌙 Selamat Malam";
+    }
 
 }
 
@@ -42,55 +32,41 @@ greeting.innerHTML =
 SCROLL MENU
 ========================= */
 
-function scrollToSection(id){
+function scrollToSection(id) {
 
-const section =
-document.getElementById(id);
+    const section = document.getElementById(id);
 
-if(section){
+    if (section) {
 
-section.scrollIntoView({
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
 
-behavior:"smooth"
-
-});
-
-}
+    }
 
 }
 
 /* =========================
-MAP
+LEAFLET MAP
 ========================= */
 
-const mapElement =
-document.getElementById("map");
+const mapElement = document.getElementById("map");
 
-if(mapElement){
+if (mapElement) {
 
-const map =
-L.map('map').setView(
-[-7.7233,109.0090],
-13
-);
+    const map = L.map("map").setView([-7.7233, 109.0090], 13);
 
-L.tileLayer(
-'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-{
-attribution:
-'&copy; OpenStreetMap'
-}
-).addTo(map);
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution: "&copy; OpenStreetMap"
+        }
+    ).addTo(map);
 
-L.marker(
-[-7.7233,109.0090]
-).addTo(map)
-
-.bindPopup(
-'Cilacap'
-)
-
-.openPopup();
+    L.marker([-7.7233, 109.0090])
+        .addTo(map)
+        .bindPopup("Cilacap")
+        .openPopup();
 
 }
 
@@ -98,179 +74,143 @@ L.marker(
 DARK MODE
 ========================= */
 
-const darkBtn =
-document.getElementById(
-"darkModeBtn"
-);
+const darkBtn = document.getElementById("darkModeBtn");
 
-darkBtn.addEventListener(
-"click",
-() => {
+if (darkBtn) {
 
-document.body.classList.toggle(
-"dark"
-);
+    if (localStorage.getItem("theme") === "dark") {
 
-/* SIMPAN MODE */
+        document.body.classList.add("dark");
+        darkBtn.innerHTML = "☀️ Light Mode";
 
-if(
-document.body.classList.contains(
-"dark"
-)
-){
+    }
 
-localStorage.setItem(
-"theme",
-"dark"
-);
+    darkBtn.addEventListener("click", () => {
 
-darkBtn.innerHTML =
-"☀️ Light Mode";
+        document.body.classList.toggle("dark");
 
-}
+        if (document.body.classList.contains("dark")) {
 
-else{
+            localStorage.setItem("theme", "dark");
+            darkBtn.innerHTML = "☀️ Light Mode";
 
-localStorage.setItem(
-"theme",
-"light"
-);
+        } else {
 
-darkBtn.innerHTML =
-"🌙 Dark Mode";
+            localStorage.setItem("theme", "light");
+            darkBtn.innerHTML = "🌙 Dark Mode";
 
-}
+        }
 
-}
-);
-
-/* =========================
-CEK THEME
-========================= */
-
-if(
-localStorage.getItem(
-"theme"
-) === "dark"
-){
-
-document.body.classList.add(
-"dark"
-);
-
-darkBtn.innerHTML =
-"☀️ Light Mode";
+    });
 
 }
 
 /* =========================
-GO TO CMS
+MENU CMS
 ========================= */
 
-function goToCMS(){
+function goToCMS() {
 
-window.location.href =
-"cms.html";
+    const isLogin = localStorage.getItem("isLogin");
+
+    if (isLogin === "true") {
+
+        window.location.href = "cms.html";
+
+    } else {
+
+        window.location.href = "login.html";
+
+    }
 
 }
 
 /* =========================
-AMBIL ARTIKEL CMS
+AMBIL ARTIKEL DARI CMS
 ========================= */
 
-const api =
-"http://localhost:3000/api/artikel";
+const api = "http://localhost:3000/api/artikel";
 
-async function tampilkanArtikelCMS(){
+async function tampilkanArtikelCMS() {
 
-try{
+    const container = document.getElementById("cmsArtikelContainer");
 
-const response =
-await fetch(api);
+    if (!container) return;
 
-const articles =
-await response.json();
+    try {
 
-const container =
-document.getElementById(
-"cmsArtikelContainer"
-);
+        container.innerHTML = "<p>Loading artikel...</p>";
 
-container.innerHTML = "";
+        const response = await fetch(api);
 
-/* CEK DATA */
+        if (!response.ok) {
 
-if(articles.length === 0){
+            throw new Error("Gagal mengambil data");
 
-container.innerHTML =
+        }
 
-"<p>Belum ada artikel</p>";
+        const articles = await response.json();
 
-return;
+        container.innerHTML = "";
 
-}
+        if (!Array.isArray(articles) || articles.length === 0) {
 
-/* LOOP ARTIKEL */
+            container.innerHTML = "<p>Belum ada artikel.</p>";
 
-articles.forEach((article)=>{
+            return;
 
-container.innerHTML += `
+        }
 
-<div class="cms-card">
+        articles.forEach((article) => {
 
-<h3>
-${article.judul}
-</h3>
+            container.innerHTML += `
 
-<p>
-${article.isi}
-</p>
+            <div class="cms-card">
 
-<span>
-${article.kategori}
-- ${article.penulis}
-</span>
+                <h3>${article.judul}</h3>
 
-</div>
+                <p>${article.isi}</p>
 
-`;
+                <span>
+                    ${article.kategori} | ${article.penulis}
+                </span>
 
-});
+            </div>
 
-}
+            `;
 
-catch(error){
+        });
 
-console.log(
-"Error:",
-error
-);
+    } catch (error) {
 
-}
+        console.error(error);
+
+        container.innerHTML = `
+
+            <p style="color:red">
+                Gagal mengambil artikel dari server.
+            </p>
+
+        `;
+
+    }
 
 }
 
 tampilkanArtikelCMS();
 
 /* =========================
-PROFILE IMAGE EFFECT
+EFEK FOTO PROFILE
 ========================= */
 
-const profileImg =
-document.querySelector(
-".profile img"
-);
+const profileImg = document.querySelector(".profile img");
 
-if(profileImg){
+if (profileImg) {
 
-profileImg.addEventListener(
-"click",
-()=>{
+    profileImg.addEventListener("click", () => {
 
-profileImg.classList.toggle(
-"active-img"
-);
+        profileImg.classList.toggle("active-img");
 
-});
+    });
 
 }

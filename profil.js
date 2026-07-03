@@ -165,7 +165,7 @@ async function tampilkanArtikel(){
     try{
 
         const response =
-        await fetch("http://localhost:3000/artikel");
+        await fetch("http://localhost:3000/api/artikel");
 
         const articles =
         await response.json();
