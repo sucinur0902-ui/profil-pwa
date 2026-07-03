@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 /* =========================
-DATABASE CONFIG
+DATABASE CONFIG (SAFE)
 ========================= */
 
 const db = mysql.createConnection({
@@ -20,16 +20,18 @@ const db = mysql.createConnection({
 });
 
 /* =========================
-CONNECT DATABASE (FIXED)
+CONNECT DATABASE (DEBUG FIX)
 ========================= */
 
 db.connect((err) => {
     if (err) {
         console.log("❌ Database Error:");
-        console.log(err.message); // biar lebih jelas
-    } else {
-        console.log("✅ Database Connected");
+        console.log(err.code);
+        console.log(err.message);
+        return;
     }
+
+    console.log("✅ Database Connected");
 });
 
 /* =========================
@@ -63,6 +65,10 @@ TAMBAH ARTIKEL
 
 app.post("/api/artikel", (req, res) => {
     const { judul, kategori, penulis, isi } = req.body;
+
+    if (!judul || !kategori || !penulis || !isi) {
+        return res.status(400).json({ error: "Data tidak lengkap" });
+    }
 
     const sql =
         "INSERT INTO artikel (judul, kategori, penulis, isi) VALUES (?, ?, ?, ?)";
@@ -118,7 +124,7 @@ app.delete("/api/artikel/:id", (req, res) => {
 SERVER (RAILWAY SAFE)
 ========================= */
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Server running on port ${PORT}`);
