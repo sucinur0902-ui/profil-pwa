@@ -13,10 +13,15 @@ DATABASE
 
 const db = mysql.createConnection({
 
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "cms_profile"
+    host: process.env.MYSQLHOST,
+
+    user: process.env.MYSQLUSER,
+
+    password: process.env.MYSQLPASSWORD,
+
+    database: process.env.MYSQLDATABASE,
+
+    port: process.env.MYSQLPORT
 
 });
 
@@ -59,11 +64,7 @@ app.get("/api/artikel", (req, res) => {
 
     db.query(sql, (err, result) => {
 
-        if (err) {
-
-            return res.status(500).json(err);
-
-        }
+        if (err) return res.status(500).json(err);
 
         res.json(result);
 
@@ -77,48 +78,19 @@ TAMBAH ARTIKEL
 
 app.post("/api/artikel", (req, res) => {
 
-    const {
-
-        judul,
-        kategori,
-        penulis,
-        isi
-
-    } = req.body;
-
-    const sql = `
-        INSERT INTO artikel
-        (judul,kategori,penulis,isi)
-        VALUES (?,?,?,?)
-    `;
+    const { judul, kategori, penulis, isi } = req.body;
 
     db.query(
 
-        sql,
+        "INSERT INTO artikel (judul,kategori,penulis,isi) VALUES (?,?,?,?)",
 
-        [
+        [judul, kategori, penulis, isi],
 
-            judul,
-            kategori,
-            penulis,
-            isi
+        (err) => {
 
-        ],
+            if (err) return res.status(500).json(err);
 
-        (err, result) => {
-
-            if (err) {
-
-                return res.status(500).json(err);
-
-            }
-
-            res.json({
-
-                success: true,
-                message: "Artikel berhasil ditambahkan"
-
-            });
+            res.json({ success: true });
 
         }
 
@@ -132,55 +104,19 @@ EDIT ARTIKEL
 
 app.put("/api/artikel/:id", (req, res) => {
 
-    const id = req.params.id;
-
-    const {
-
-        judul,
-        kategori,
-        penulis,
-        isi
-
-    } = req.body;
-
-    const sql = `
-        UPDATE artikel
-        SET
-        judul=?,
-        kategori=?,
-        penulis=?,
-        isi=?
-        WHERE id=?
-    `;
+    const { judul, kategori, penulis, isi } = req.body;
 
     db.query(
 
-        sql,
+        "UPDATE artikel SET judul=?, kategori=?, penulis=?, isi=? WHERE id=?",
 
-        [
+        [judul, kategori, penulis, isi, req.params.id],
 
-            judul,
-            kategori,
-            penulis,
-            isi,
-            id
+        (err) => {
 
-        ],
+            if (err) return res.status(500).json(err);
 
-        (err, result) => {
-
-            if (err) {
-
-                return res.status(500).json(err);
-
-            }
-
-            res.json({
-
-                success: true,
-                message: "Artikel berhasil diperbarui"
-
-            });
+            res.json({ success: true });
 
         }
 
@@ -194,30 +130,17 @@ HAPUS ARTIKEL
 
 app.delete("/api/artikel/:id", (req, res) => {
 
-    const id = req.params.id;
-
-    const sql = "DELETE FROM artikel WHERE id=?";
-
     db.query(
 
-        sql,
+        "DELETE FROM artikel WHERE id=?",
 
-        [id],
+        [req.params.id],
 
-        (err, result) => {
+        (err) => {
 
-            if (err) {
+            if (err) return res.status(500).json(err);
 
-                return res.status(500).json(err);
-
-            }
-
-            res.json({
-
-                success: true,
-                message: "Artikel berhasil dihapus"
-
-            });
+            res.json({ success: true });
 
         }
 
@@ -229,8 +152,10 @@ app.delete("/api/artikel/:id", (req, res) => {
 SERVER
 ========================= */
 
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
 
-    console.log("🚀 Server running : http://localhost:3000");
+app.listen(PORT, () => {
+
+    console.log(`🚀 Server running on port ${PORT}`);
 
 });
