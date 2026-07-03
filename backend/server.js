@@ -20,14 +20,14 @@ const db = mysql.createConnection({
 });
 
 /* =========================
-CONNECT DATABASE (DEBUG FIX)
+CONNECT DATABASE (ROBUST FIX)
 ========================= */
 
 db.connect((err) => {
     if (err) {
-        console.log("❌ Database Error:");
-        console.log(err.code);
-        console.log(err.message);
+        console.log("❌ DATABASE ERROR:");
+        console.log("CODE:", err.code);
+        console.log("MESSAGE:", err.message);
         return;
     }
 
@@ -51,7 +51,7 @@ app.get("/api/artikel", (req, res) => {
 
     db.query(sql, (err, result) => {
         if (err) {
-            console.log(err);
+            console.log("GET ERROR:", err);
             return res.status(500).json({ error: "Database error" });
         }
 
@@ -75,7 +75,7 @@ app.post("/api/artikel", (req, res) => {
 
     db.query(sql, [judul, kategori, penulis, isi], (err) => {
         if (err) {
-            console.log(err);
+            console.log("INSERT ERROR:", err);
             return res.status(500).json({ error: "Insert gagal" });
         }
 
@@ -95,7 +95,7 @@ app.put("/api/artikel/:id", (req, res) => {
 
     db.query(sql, [judul, kategori, penulis, isi, req.params.id], (err) => {
         if (err) {
-            console.log(err);
+            console.log("UPDATE ERROR:", err);
             return res.status(500).json({ error: "Update gagal" });
         }
 
@@ -112,7 +112,7 @@ app.delete("/api/artikel/:id", (req, res) => {
 
     db.query(sql, [req.params.id], (err) => {
         if (err) {
-            console.log(err);
+            console.log("DELETE ERROR:", err);
             return res.status(500).json({ error: "Delete gagal" });
         }
 
@@ -121,10 +121,10 @@ app.delete("/api/artikel/:id", (req, res) => {
 });
 
 /* =========================
-SERVER (RAILWAY SAFE)
+SERVER (RAILWAY SAFE FIX)
 ========================= */
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Server running on port ${PORT}`);
